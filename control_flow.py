@@ -19,8 +19,11 @@ print(ord("B"))  # Command to see where capital B falls in the order listing
 
 #################### Conditional Statements ##################
 # If the if statement is executed then the other statements are skipped
+# if/elif/else is not a loop - it's a decision structure
+# If the if statement is true then Python does not check the elif statement
+# The loop continues only if it's a loop and its't broken or exited
 
-temperature = 25  # Sets a variable called temperature equal to 15
+temperature = 31  # Sets a variable called temperature equal to 31
 if temperature > 30:  # If statement to see if the temperature is greater then 30
     # If the above statement is true then "It's warm" is printed
     print("It's warm")
@@ -33,7 +36,7 @@ elif temperature > 20:  # elif statement which presents a different option. Chec
 else:
     # If the else statement is executed then "It's cold" is printed
     print("It's cold")
-print("Done")  # "Done" is printed regardless
+print("Done")  # "Done" is printed regardless of what part of the loop is executed
 
 
 ################### Ternary Operator ###################
@@ -66,7 +69,7 @@ good_credit = False
 student = True  # States that a variable called student is set to True
 
 # and
-if high_income and good_credit:  # States that both high_income and good_credit have to be true for "Eligible" to be printed
+if high_income and good_credit:  # Sta tes that both high_income and good_credit have to be true for "Eligible" to be printed
     print("Eligible")
 else:  # If one or both of high_income or good_credit are false then "Not Eligible" is printed
     print("Not Eligible")
@@ -97,14 +100,14 @@ else:  # Otherwise, if both high_income and good_credit are both false then the 
 # you're using the "and" operator then the entire expression will be evaluated to false, even if everything
 # else is true. If you're using the "or" operator then even if one of the variables is false then the
 # expression will continue to be evaluated because it assumes that there's still one that will be true. If one
-# happens to be true then the enitre expression is evaluated to true, even though there's some that coule be false
+# happens to be true then the enitre expression is evaluated to true, even though there's some that could be false
 
 
 ################# Chaining Comparison Operators ###################
 
 # age should be between 18 and 65
 
-age1 = 66  # Sets a variable called age1 equal to 22
+age1 = 64  # Sets a variable called age1 equal to 64
 # if age1 >= 18 and age1 < 65: - Does the same thing as the line below
 if 18 <= age1 < 65:  # Checks to see if age1 is greater then or equal to and age1 is less then 65
     print("Correct")  # If the above statement is true then "Correct" is printed
@@ -113,13 +116,17 @@ else:  # If age1 is 17 or less or 65 or greater then "Not Correct" will be print
 
 
 ################### For Loops ####################
+# For loop is a control structure used to repeat a block of code a specific number of times, usually
+# by looping over a sequence like a list, string, or range of numbers. i.e. "For each item in a group, do something"
 
-# Start at the #1 but end before #4, 4 is not included in the loop, it's everything up until 4
-for number in range(1, 10, 2):  # You can also include a third argument that is a step (1, 10, 2) would say start at 1, go to 10 but incrament by 2 each iteration
+for number in range(1, 10, 2):  # You can also include a third argument that is a step (1, 10, 2) 
+    # would say start at 1, count to the number 10 but incrament by 2 each iteration
     print("Attempt", number, number * ".")
+    # Not only prints out the number of iterations that you're on but also prints out a period for the number iteration
 
 
 ################# For Else ######################
+# For Else loops are unique to Python where the else block runs only if the foor loop completes without a break
 
 successful = False  # Sets a variable called successful equal to False
 # Sets a variable called number1 for each loop iteration. Range(3) states that it's going to be run 3 times
@@ -134,6 +141,7 @@ else:  # If after the 3 iterations and successful is still false then the follow
 
 
 ################# Nested Loops #######################
+# A nested loop is a loop inside of a loop. The inner loop runs completely every time, but the outer loop will only run once
 
 for x in range(5):  # The iteration starts out with 0
     for y in range(3):  # The iteration starts out with 0
@@ -150,7 +158,7 @@ for x in range(5):  # The iteration starts out with 0
 # Iterable simply means that we're able to execute over it in a loop. With each iteration the variable will have a different value
 
 print(type(5))  # Prints out the type of 5
-print(type(range(5)))  # Prints out the typs of range(5)
+print(type(range(5)))  # Prints out the type of range(5)
 
 for x in range(4):  # Defines a variable called x and will reassign it's value for each number in the range
     print(x + 1)  # Prints out each number on a seperate line
@@ -164,7 +172,7 @@ for x in [1, 2, 3, 4]:  # Defines a variables called x and will reassign it's va
 
 ################# While Loop ###################
 # The loop will continue as long as then condition is still true
-# Use a break statement to avoid getting stuck in an infinit loop
+# Use a break statement to avoid getting stuck in an infinite loop
 
 number2 = 100  # Defines a variable called number2 equal to 100
 
@@ -181,9 +189,9 @@ command = ""  # Sets a variable called command equal to an empty string
 
 ################# Exercise ######################
 
-count = 0
-for number in range(1, 10):
-    if number % 2 == 0:
-        count += 1
-        print(number)
-print(f"We have {count} even numbers")
+count = 0 # Sets a variable called count equal to 0
+for number in range(1, 10): # Uses a for loop to loop through the numbers in the range of 1-10
+    if number % 2 == 0: # If the remainder of the number divided by 2 is equal to 0
+        count += 1 # Increase the count by 1
+        print(number) # Print the number in the terminal
+print(f"We have {count} even numbers") # Prints out how many even numbers we have

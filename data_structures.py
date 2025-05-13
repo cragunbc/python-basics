@@ -6,24 +6,25 @@ from pprint import pprint
 
 ################### Lists ####################
 
-letters = ["a", "b", "c"]  # List of letters
-matrix = [[0, 1], [2, 3]]  # A list of a couple lists
+letters = ["a", "b", "c"]  # List of letters, uses square brackets and are seperated by a comma
+matrix = [[0, 1], [2, 3]]  # A list of a couple lists, uses square brackets as well and each set is inside it's own set of square brackets
 zeros = [0] * 5  # Prints a list with 5 0's
-# Concatinates or combines the zeros list and the letters list
+# Concatinates or combines the zeros list and the letters list and sets "combined" variable equal to the result of adding the two
 combined = zeros + letters
-print(combined)  # Prints the combined lists
+print(combined)  # Prints the combined vairable, that contains the two combined lists
 # Creates a list of numbers starting with 0 and going up to but not including 20
 numbers = list(range(20))
-print(numbers)  # Prints the numbers list
+print(numbers)  # Prints the numbers variable that contains the list of numbers. Doesn't include the number 20
 # Creates a list to house the letters for the word "Hello World"
-chars = list("Hello World")
+chars = list("Hello World") # Creates a variable called chars and sets the value equal to a list of each individual letter of the
+# argument that's being passed in, which is "Hello World" 
 print(len(chars))  # Prints the length of the chars variable
 print(chars)  # Prints the chars variable
 
 
 ##################### Accessing Items #######################
 
-# Creates a variable and assigns a list of letters to it
+# Creates a variable called letters1 and assigns a list of letters to it
 letters1 = ["a", "b", "c", "d"]
 # Takes the letter at the beginning of the list and replaces it with a capital A ("A")
 letters1[0] = "A"
@@ -31,17 +32,19 @@ print(letters1[0])  # Prints the letter at position 0 of the list
 print(letters1[-1])  # Prints the letter at the end of the list
 print(letters1[0:3])  # Prints the first 3 letters in the list
 numbers1 = list(range(20))  # Assigns the first 20 numbers starting with 0
+print(numbers1) # Prints out the numbers1 variable that has the 20 numbers
 print(numbers1[::-1])  # Prints the numbers in the list but in reverse order
 
 
 ######################### List Unpacking ########################
 
-numbers2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  # Creates a list
+numbers2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  # Creates a variable called numbers2 and assigns it a list of numbers
 first, second, *other = numbers2  # Unpacks the list. What's going on here
 # is the first letter is listed, the second letter is listed, and then all
 # of the other letters are stored in the *others variable
 print(first)  # Prints the first letter
-print(other)  # Prints the letters that are stored in the other variable
+print(second) # Prints out the second letter
+print(other)  # Prints the letters that are stored in the other variable, i.e. the rest of the numbers
 
 first = numbers2[0]  # Defines the first letter in the list
 second = numbers2[1]  # Defines the second letter in the list

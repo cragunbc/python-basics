@@ -62,11 +62,11 @@ print(course2.title())  # Capitalizes the first letter of each word
 print(course2.strip())  # Strips any extra white space at the beginning or end
 print(course2.lstrip())  # Strips extra white space from the beginning
 print(course2.rstrip())  # Strips extra white space from the end of the string
-print(course2.find("pro"))  # Returns the location of characters
+print(course2.find("pro"))  # Returns the location of characters, in this case it's where it starts -> position 7
 # Python is case sensitive. When searching for characters be mindful of what you're trying to find
-print(course2.replace("p", "j"))  # Replaces all insances "p" with "j"
-print("pro" in course2)  # Returns true or false
-print("swift" not in course)  # Returns true or false
+print(course2.replace("p", "j"))  # Replaces all insances "p" with "j". "p" is the first argument, "j" is the second
+print("pro" in course2)  # Returns true or false if "pro" is found in the variable course2
+print("swift" not in course)  # Returns true or false based on if "swift" is not found in the variable course2
 
 
 ################## Numbers ###################
@@ -77,7 +77,7 @@ print(10 + 3)  # Addition
 print(10 - 3)  # Subtraction
 print(10 * 3)  # Multiplication
 print(10 / 3)  # Division
-print(10 // 3)  # Division but returns a whole number
+print(10 // 3)  # Division but returns a whole number, no remainder
 print(10 % 3)  # Modulus, or returns the remainder
 print(10 ** 3)  # Exponent
 
@@ -98,12 +98,12 @@ print(math.ceil(2.2))  # Returns the ceiling of a number
 
 ############### Type Conversion ##################
 
-a = input("a: ")
-print(type(a))
-y = int(a) + 1
-print(f"a: {a}, y: {y}")
+a = input("a: ") # Gathers input from the user and stores it in variable a
+print(type(a)) # Prints the class type that the users input is, in this case it's a string
+y = int(a) + 1 # Takes the input from variable a that the user provided, converts it to a int and adds 1
+print(f"a: {a}, y: {y}") # Prints the values of a and y
 
-int(x)
-float(x)
-bool(x)
-str(x)
+int(x) # Converts x to an int
+float(x) # Converts x to a float
+bool(x) # Converts x to a boolean
+str(x) # Converts x to a string
