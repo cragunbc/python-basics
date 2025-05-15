@@ -10,6 +10,10 @@
 # Classes use Pascal naming convention, Uppercase letter for each new word. No underscore
 # By convention the parameter that we put in the functions is "self", it a reference to the class
 
+from collections import namedtuple
+from abc import ABC, abstractmethod
+
+
 class Point:  # Use the "class" definition and name the class in Pascal naming convention
     def draw(self):  # Defines a function for the class called draw that has a parameter of "self"
         # Whenever this function is called the word "draw" is printed on the console
@@ -463,3 +467,177 @@ class FlyingFish(Flyer, Swimmer):
     pass  # Placeholder phrase that does nothing when executed. Used when you want to run the program with no code in the method
 
 # This implamentation of multiple inheritance is a good example that doesn't have methods that overlap each other.
+
+
+####################################### Good Example of Inheritance #########################################
+# Abstract base class is a class that cannot be instantiated on its own and it meant to be inherited by other
+# classes. It defines a common interface or blueprint for its subclasses, which must implement certain methods
+# Abstract methods must be implemented in child classes. If a subclass doesn't implement all abstract methods
+# from the base class it is also considered abstract and can't be instantiated
+
+
+# This is a custom class that we've created to handle errors and exceptions which is inherited from the Exception class.
+# This is ussed to provide some more descriptive errors about the stream classes below
+class InvalidOperationError(Exception):
+    pass
+
+
+# This is our abstract base class. We know that because it inherits the "ABC"
+# This class cannot be instantiated directly but is just a template for the other classes
+# Abstract classes define certain methods that subclasses must contain. In this case that's the "read" method
+# **Note** - In order to use abstraction we have to import it, which we've done at the top of the screen
+class Stream(ABC): # Defines a class called Stream and inherits the abstract class
+    def __init__(self): # Defines a constructor that takes the parameter of self
+        self.opened = False # Initially sets self equal to False
+
+    def open(self): # Defines a method called open which takes the parameter of self
+        if self.opened: # Checks to see if the stream is already open..
+            raise InvalidOperationError("Stream is already open") # If stream is open an exception is raised
+        self.opened = True # If stream is not open then the stream is set to be open (True)
+
+    def close(self): # Defines a method called close which takes the parameter of self
+        if not self.opened: # Checks to see if the steram is already closed
+            raise InvalidOperationError("Stream is alreayd closed") # If stream is closed an exception is raised
+        self.opened = False # If stream is not closed then the stream is set to closed (False)
+
+    @abstractmethod # States that the following method is abstract, which means that each subclass is required to have this method
+    def read(self): # Defines a method called read which takes the parameter of self
+        pass # Passes over the method, no action is preformed. Preforms the action of reading over the stream
+
+
+# Defines three concrete subclasses of the abstract Stream class. Each class as the read method, which makes them usable
+class FileStream(Stream): # Defines a class called FileStream which inherits the Stream class
+    def read(self): # Implements the required read method
+        print("Reading data from a file") # When read is called in this case, it prints the following message
+
+
+class NetworkStream(Stream): # Defines a class called NetworkStream which inherits the Stream class
+    def read(self): # Implements the required read method
+        print("Reading data from a network") # When read is called in this case, it prints the following message
+
+
+class MemoryStream(Stream): # Defines a class called MemoryStream which inherits the Stream class
+    def read(self): # Implements the required read method
+        print("Reading data from a memory stream.") # When read is called in this case, it prints the following message
+
+
+stream = MemoryStream() # Creates an instance of the MemoryStream class and assigns it to a value called stream
+print(stream.open()) # First checks to see if the stream is already open. Since it's not because the default is set to
+# False then stream is set to open (True)
+
+
+####################################### Polymorphism #################################################
+# Polymorphism is an object-oriented concept that allows objects of different classes to be treated as objects
+# of a common superclass. It means "many forms", and in Python, it allows the same method or function name
+# to behave differently depending on the object it is acting upon
+
+class UIControl(ABC): # Defines our base abstract class called UIControl that inherits the abstract class
+    @abstractmethod # Uses a decorator to say that the draw method is abstract and is required for each subclass
+    def draw(self):
+        pass
+
+
+class TextBox(UIControl): # Defines a class called TextBox that inherits the UIControl class
+    def draw(self): # Implements the required draw method
+        print("TextBox") # When draw is called, in this case it prints the following message
+
+
+class DropDownList(UIControl): # Defines a class called DropDownList that inherits the UIControl class
+    def draw(self): # Implements the required draw method
+        print("DropDownList") # When draw is called, in this case it prints the following message
+
+
+# This function is a good example of polymorphism because even though each control that is being passed through
+# is called the draw method, each draw method is being implemented in a different way
+def draw(controls): # Defines a function called draw that takes a list of controls
+    for control in controls: # Loops through each control in the controls list
+        control.draw() # For each control the draw method is called
+
+
+ddl = DropDownList() # Defines a variable called ddl and assigns it an instance of the DropDownList class
+print(isinstance(ddl, UIControl)) # Checks to see if the ddl variable is an instance of the UIControl class. It is
+# since the DropDownList class inherits the UIControl class
+textbox = TextBox() # Defines a variable calles textbox and assigns it an instance of the TextBox class
+draw([ddl, textbox]) # Calls the draw function from above and passes in a list that contains the two variables that we
+# defined that are instances of both the DropDownList and TextBox classes and prints out the results in the terminal 
+# of the draw method of each class
+
+
+############################################# Duck Typing ############################################
+# Duck Typing is a concept where the typs or class of an object is less important than the methods or properties it has
+# We rely on the objects behavior, not its type
+
+class TextBox1: # Defines a class called TextBox1
+    def draw(self): # Defines a method called draw that takes the parameter of self
+        print("TextBox") # When draw is called upon, in this case the following message is printed
+
+
+class DropDownList1: # Defines a class called DropDownList1
+    def draw(self): # Defines a method called draw that takes the parameter of self
+        print("DropDownList") # When draw is called upon, in this case the following message is printed
+
+
+def draw1(controls): # Defines a function called draw1 that takes a parameter of controls
+    for control in controls: # Loops through each of the controls from the list that's passed through
+        control.draw() # Calls the draw method for each control that is in the list 
+
+# The draw1 function above doesn't care what class each control is. The only assumptions it makes is that
+# each control that you're passing through has a draw() method. As long as the control has a draw() method
+# then it will work, regardless of what it's actual type is
+
+################################# Extending Built-In Types #######################################
+
+class Text(str): # Defines a custom class called Text that inherits the built in str class from Python
+    def duplicate(self): # Defines a method called duplicate that takes the parameter of self
+        return self + self # Returns the the string repeated twice
+
+
+text = Text("Python") # Defines a variable called text that is an instance of the Text class, and passes in the
+# word "Python" as the argument
+print(text.duplicate()) # Prints out on the screen the text variable after it called the duplicate method inside
+# the Text class
+
+
+class TrackableList(list): # Defines a custom class called TrackableList which inherits the list class from Python
+    def append(self, object): # Overrides the append method of the list class and creates our own append method which
+        # takes self and object as the parameters
+        print("Append called") # Everytime something is appended to the list the message "Append called" is printed
+        super().append(object) # Calls the original append() method using super() to actually add the item to the list
+
+
+list = TrackableList() # Defines a variable called list that is a new instance of the TrackableList class
+list.append("1") # Prints "Append called" in the terminal and then appends 1 to the list
+
+
+########################################## Data Classes ############################################
+
+
+class Point7: # Defines a class called Point7
+    def __init__(self, x, y): # Defines a constructor that takes the parameters of self, x, and y
+        self.x = x # Sets the value of x for each instance of this class to x
+        self.y = y # Sets the value of y for each instance of this class to y
+
+    def __eq__(self, other): # Overrides the default equality behavior so that two values can be compared based
+        # on their value and not based on their location in memory
+        return self.x == other.x and self.y == other.y # Returns true if the values of x and y for the two objects equal each other
+
+
+p1 = Point7(1, 2) # Defines a variable called p1 and assigns it a new instance of the Point7 class with the arguments of 1 and 2
+p2 = Point7(1, 2) # Defines a variable called p2 and assigns it a new instance of the Point7 class with the arguments of 1 and 2
+print(p1 == p2) # Prints out on the screen either True or False based on if the values equal each other
+print(id(p1)) # Prints out the ID or the location in memory that the value of p1 is being stored
+print(id(p2)) # Prints out the ID or the location in memory that the value of p2 is being stored
+
+# Named Tuples are a factory function that creates a lightweight immutable class, meaning that once the value is created we can't edit them
+# namedtuple is a function from Python's collections module. It lets you create simple classes that behave like tuples but with named fields
+# In order to use the namedtuple class we have to import it which we've done at the top of this file
+
+# Defines a new class called Point8 which is the "external" name of the class
+# Calls the namedtuple function and passes in the follow values:
+# "Point" -> This is the "internal" name of the class that's being created
+# "x" -> One of the two attributes that's being used in the class
+# "y" -> The other attribute that we're wanting to use in our class
+Point8 = namedtuple("Point", ["x", "y"])
+p3 = Point8(x=1, y=2) # Defines a variable called p3 that is a new instance of the Point8 class that passes in the arguments of x=1 and y=2
+p4 = Point8(x=1, y=2) # Defines a variable called p4 that is a new instance of the Point8 class that passes in the arguments of x=1 and y=2
+print(p3 == p4) # Prints either True or False on the screen based on if the values are true or not

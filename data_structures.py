@@ -47,8 +47,11 @@ print(second) # Prints out the second letter
 print(other)  # Prints the letters that are stored in the other variable, i.e. the rest of the numbers
 
 first = numbers2[0]  # Defines the first letter in the list
+print(first)
 second = numbers2[1]  # Defines the second letter in the list
+print(second)
 third = numbers2[2]  # Defines the third letter in the list
+print(third)
 
 
 ###################### Looping Over a List ###########################
@@ -101,21 +104,25 @@ print(sorted(numbers3, reverse=True))
 numbers3.sort(reverse=True)  # Sorts the numbers in descending order
 print(numbers3)
 
-items = [
+items = [ # Creates a variable called items and assigns a list of tuples to it
     ("Product1", 10),
     ("Product2", 9),
     ("Product3", 12),
 ]
 
 
-def sort_item(item):
-    return item[1]
+def sort_item(item): # Defines a new function called sort_item that takes a parameter of item
+    return item[1] # Returns the value at index 1 of the item. i.e. -> ("Product1", 10) would return 10
 
 
-items.sort()  # Python doesn't know how to sort this list. We need a function
+
+items.sort()  # Python doesn't know how to sort this list because it's sorting the items off of alphabetical
+# order. Since all of the Products are already in alphabetical order there isn't going to be any changes.
+# If we want to sort by numbers then we need a function
 print(items)
 
-items.sort(key=sort_item)
+items.sort(key=sort_item) # Sorts the items, but uses the special function that we created which tells
+# Python to sort the items in the list by the number in each value and not the Product name
 print(items)
 
 
@@ -182,7 +189,7 @@ prices2 = [item[1] for item in items3]
 print(prices1)
 print(prices2)
 
-# Defines a variable called filtered1 and prints ou the items that have a price greater then or equal to 10
+# Defines a variable called filtered1 and prints out the items that have a price greater then or equal to 10
 filtered1 = list(filter(lambda item: item[1] >= 10, items3))
 # Different way of writting the function above
 filtered2 = [item for item in items3 if item[1] >= 10]
@@ -305,6 +312,7 @@ if 1 in first:  # Checks to see if 1 is in the first set
 
 point6 = {"x": 1, "y": 2}  # Creates a new dictionary
 point7 = dict(x=1, y=2)  # Creates a new dictionary
+print(point6)
 
 print(point6["x"])  # Prints the value associated with key "x"
 point6["x"] = 10  # Changes the value associated with key "x" to 10
