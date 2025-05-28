@@ -5,6 +5,7 @@
 # - Organize your code into seperate files
 # - Reuse code across multiple programs
 # - Keep your code easier to maintain and understand
+# The files that are in a module should all be realted to each other
 
 # Modules are mapped to a file
 
@@ -16,10 +17,11 @@
 # current file. To avoid anything bad from potentially happening, only import the functions that you need to accomplish the task
 
 # States the module (or file) that you're importing from and which function from that module you're importing
+from Modules_2.shopping.sales import calc_shipping, calc_tax
 import sys
-from Modules_2.sales import calc_shipping, calc_tax
-import Modules_2.sales
-from Modules_2 import sales
+import Modules_2.shopping.sales
+
+# from Modules_2 import sales
 
 # 2 ways to import a module above, either the entire module and use the . selector to select a specific method, or you can
 # import each method seperately
@@ -31,8 +33,8 @@ calc_shipping()
 calc_tax()
 
 # The second option below comes from importing the module as a whole but selecting the desired function using the . selector
-Modules_2.sales.calc_tax()
-Modules_2.sales.calc_shipping()
+Modules_2.shopping.sales.calc_tax()
+Modules_2.shopping.sales.calc_shipping()
 
 
 #################################### Compiled Python Files ########################################
@@ -68,3 +70,37 @@ print(sys.path)
 # if we'd already imported the functions at the top of the screen. If we implement the package system then calling these functions
 # would turn into Modules_2.sales.calc_tax() and Modules_2.sales.calc_shipping(). However if we prefix the same of the package in
 # the import statement then we won't have to worry about typing out the package name each time
+
+
+
+################################### Sub Packages ##############################################
+# If we want to break down a package further then just itself and add sub folders inside then we'll need to make sure to add a
+# __init__.py file so that the sub folder can be treated as a package
+
+
+
+
+################################## Intra-package References #########################################
+# If we have sub folder inside of a folder and we want to use a method from one sub folder in another then we would need to structure
+# our code like one of the following ways:
+# from {parent_folder}.{sub_folder} import {file} - Absolute reference
+# from ..{sub_folder} import {file} - Relative reference
+
+# As a best practice it is always best to use absolute reference when importing from a module
+
+
+
+############################################## dir Function ################################################
+# The dir function can help use know the file structure of a module. Examples are below
+
+# print(sales.__name__) - Prints the name of the module
+# print(sales.__package__) - Prints the name of the package
+# print(sales.__file__) - Prints out the address of the file
+
+
+
+
+########################################## Running Modules as a Script ################################################
+# We can run a module as a script by adding a print line at the beginning of each module. I the current file structure
+# that we have if we had a print line at the top of the sales.py file and we ran that from the main file then whatever
+# we've put in that print file will print on the terminal when the file is run
